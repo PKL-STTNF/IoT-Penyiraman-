@@ -28,19 +28,9 @@
 
     <!-- Navbar -->
     <header class="bg-white border-b border-slate-200 px-6 py-4 mb-8 sticky top-0 z-50 shadow-sm">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div>
                 <h1 class="text-2xl font-black text-slate-900 tracking-wider">IoT-Penyiraman</h1>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
-                    <span class="relative flex h-2 w-2">
-                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                    </span>
-                    SISTEM TERHUBUNG
-                </div>
             </div>
         </div>
     </header>
@@ -62,29 +52,20 @@
 
             <!-- Card Mode Kontrol -->
             <div class="white-card rounded-2xl p-6">
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2.5 bg-slate-100 rounded-xl text-emerald-600 border border-slate-200">
-                            <i data-lucide="settings-2" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">Mode Pengoperasian</h3>
-                            <p class="text-xs text-slate-500">Pilih sistem kontrol otomatis atau manual</p>
-                        </div>
-                    </div>
+                <div class="mb-4">
+                    <h3 class="text-base font-bold text-slate-900">Mode Pengoperasian</h3>
+                    <p class="text-xs text-slate-500">Pilih sistem kontrol otomatis atau manual</p>
                 </div>
 
                 <form action="{{ route('update.mode') }}" method="POST" class="grid grid-cols-2 gap-3 mt-4">
                     @csrf
                     <button type="submit" name="mode" value="otomatis" 
                         class="p-4 rounded-xl font-bold text-xs flex flex-col items-center justify-center gap-2 transition-all duration-200 border {{ $data->mode === 'otomatis' ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-200' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100' }}">
-                        <i data-lucide="cpu" class="w-5 h-5"></i>
                         <span>OTOMATIS (SENSOR)</span>
                     </button>
                     
                     <button type="submit" name="mode" value="manual" 
                         class="p-4 rounded-xl font-bold text-xs flex flex-col items-center justify-center gap-2 transition-all duration-200 border {{ $data->mode === 'manual' ? 'bg-emerald-600 text-white border-emerald-600 shadow-md shadow-emerald-200' : 'bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100' }}">
-                        <i data-lucide="sliders" class="w-5 h-5"></i>
                         <span>MANUAL (USER)</span>
                     </button>
                 </form>
@@ -93,14 +74,9 @@
             <!-- Card Control Sakelar Pompa -->
             <div class="white-card rounded-2xl p-6">
                 <div class="flex items-center justify-between mb-2">
-                    <div class="flex items-center gap-3">
-                        <div class="p-2.5 bg-slate-100 rounded-xl text-blue-600 border border-slate-200">
-                            <i data-lucide="droplet" class="w-5 h-5"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-base font-bold text-slate-900">Status Pompa Air</h3>
-                            <p class="text-xs text-slate-500">Durasi siram: {{ $data->durasi_penyiraman ?? 5 }} Menit</p>
-                        </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900">Status Pompa Air</h3>
+                        <p class="text-xs text-slate-500">Durasi siram: {{ $data->durasi_penyiraman ?? 5 }} Menit</p>
                     </div>
                     <span class="px-3 py-1 rounded-full text-xs font-black tracking-wider border {{ $data->status_pompa === 'ON' ? 'bg-emerald-100 text-emerald-700 border-emerald-200 animate-pulse' : 'bg-rose-100 text-rose-700 border-rose-200' }}">
                         {{ $data->status_pompa }}
@@ -115,8 +91,7 @@
                         $sisaDetik = max(0, \Carbon\Carbon::now()->diffInSeconds($waktuSelesai, false));
                     @endphp
                     <div class="mt-3 p-3 bg-emerald-50 rounded-xl border border-emerald-200 flex items-center justify-between">
-                        <div class="flex items-center gap-2 text-emerald-800 text-xs font-semibold">
-                            <i data-lucide="timer" class="w-4 h-4 animate-spin text-emerald-600"></i>
+                        <div class="text-emerald-800 text-xs font-semibold">
                             <span>Sedang Menyiram Tanaman...</span>
                         </div>
                         <div class="text-sm font-black text-emerald-700 tracking-wider font-mono">
@@ -149,8 +124,8 @@
                 <div class="mt-4 flex items-center justify-between gap-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
                     <div class="text-xs text-slate-500">
                         @if($data->mode === 'otomatis')
-                            <span class="text-amber-600 font-semibold flex items-center gap-1">
-                                <i data-lucide="alert-circle" class="w-3.5 h-3.5"></i> Mode Otomatis Aktif
+                            <span class="text-amber-600 font-semibold">
+                                Mode Otomatis Aktif
                             </span>
                         @else
                             <span class="text-slate-600">Kontrol sakelar bebas digunakan.</span>
@@ -173,8 +148,7 @@
         <!-- SECTION 2: MONITORING SENSOR REALTIME (3 PARAMETER) -->
         <div>
             <div class="flex items-center justify-between mb-4">
-                <h2 class="text-base font-bold text-slate-900 flex items-center gap-2">
-                    <i data-lucide="activity" class="w-5 h-5 text-emerald-600"></i>
+                <h2 class="text-base font-bold text-slate-900">
                     Monitoring Telemetri Sensor
                 </h2>
                 <span class="text-xs text-slate-500">Auto-update tiap 3m</span>
@@ -243,14 +217,9 @@
 
         <!-- SECTION 3: PENGATURAN JADWAL DAN DURASI PENYIRAMAN -->
         <div class="white-card rounded-2xl p-6">
-            <div class="flex items-center gap-3 mb-6">
-                <div class="p-2.5 bg-slate-100 rounded-xl text-teal-600 border border-slate-200">
-                    <i data-lucide="clock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                    <h3 class="text-base font-bold text-slate-900">Pengaturan Jam & Durasi Penyiraman</h3>
-                    <p class="text-xs text-slate-500">Atur jam rutin dan lama waktu pompa menyiram sekali jalan</p>
-                </div>
+            <div class="mb-6">
+                <h3 class="text-base font-bold text-slate-900">Pengaturan Jam & Durasi Penyiraman</h3>
+                <p class="text-xs text-slate-500">Atur jam rutin dan lama waktu pompa menyiram sekali jalan</p>
             </div>
 
             <form action="{{ route('update.jadwal') }}" method="POST" class="space-y-6">
@@ -259,8 +228,8 @@
 
                     <!-- Jam Pagi -->
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                        <label class="text-xs font-bold text-slate-700 flex items-center gap-2">
-                            <i data-lucide="sun" class="w-4 h-4 text-amber-500"></i> Penyiraman Pagi
+                        <label class="text-xs font-bold text-slate-700 block">
+                            Penyiraman Pagi
                         </label>
                         <input type="time" name="jadwal_pagi" 
                             value="{{ substr($data->jadwal_pagi, 0, 5) }}" 
@@ -269,8 +238,8 @@
 
                     <!-- Jam Sore -->
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                        <label class="text-xs font-bold text-slate-700 flex items-center gap-2">
-                            <i data-lucide="sunset" class="w-4 h-4 text-orange-500"></i> Penyiraman Sore
+                        <label class="text-xs font-bold text-slate-700 block">
+                            Penyiraman Sore
                         </label>
                         <input type="time" name="jadwal_sore" 
                             value="{{ substr($data->jadwal_sore, 0, 5) }}" 
@@ -279,8 +248,8 @@
 
                     <!-- Durasi Siram -->
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
-                        <label class="text-xs font-bold text-slate-700 flex items-center gap-2">
-                            <i data-lucide="timer" class="w-4 h-4 text-blue-500"></i> Durasi Siram (Menit)
+                        <label class="text-xs font-bold text-slate-700 block">
+                            Durasi Siram (Menit)
                         </label>
                         <input type="number" name="durasi_penyiraman" min="1" max="60"
                             value="{{ $data->durasi_penyiraman ?? 5 }}" 
