@@ -30,7 +30,7 @@
     <header class="bg-white border-b border-slate-200 px-6 py-4 mb-8 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div>
-                <h1 class="text-2xl font-black text-slate-900 tracking-wider">IoT-Penyiraman</h1>
+                <h1 class="text-2xl font-black text-slate-900 tracking-wider">IoT-Penyiraman-</h1>
             </div>
         </div>
     </header>
