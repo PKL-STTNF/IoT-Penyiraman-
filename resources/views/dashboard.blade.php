@@ -145,7 +145,7 @@
 
         </div>
 
-        <!-- SECTION 2: MONITORING SENSOR REALTIME (3 PARAMETER) -->
+        <!-- SECTION 2: MONITORING SENSOR REALTIME (4 PARAMETER) -->
         <div>
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-base font-bold text-slate-900">
@@ -154,7 +154,7 @@
                 <span class="text-xs text-slate-500">Auto-update tiap 3m</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 
                 <!-- 1. Suhu Tanah -->
                 <div class="white-card rounded-2xl p-5 hover:border-orange-400 transition duration-200">
@@ -165,7 +165,7 @@
                         </div>
                     </div>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ $data->suhu_tanah == 0 ? '--' : $data->suhu_tanah }}</span>
+                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ empty($data->suhu_tanah) || $data->suhu_tanah == 0 ? '--' : $data->suhu_tanah }}</span>
                         <span class="text-lg font-bold text-slate-400">°C</span>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
@@ -174,7 +174,25 @@
                     </div>
                 </div>
 
-                <!-- 2. Kelembapan Tanah -->
+                <!-- 2. Suhu Udara -->
+                <div class="white-card rounded-2xl p-5 hover:border-amber-400 transition duration-200">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-slate-400 tracking-wider">SUHU UDARA</span>
+                        <div class="p-2 bg-amber-50 text-amber-600 rounded-lg border border-amber-200">
+                            <i data-lucide="sun" class="w-5 h-5"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-baseline gap-2">
+                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ empty($data->suhu_udara) || $data->suhu_udara == 0 ? '--' : $data->suhu_udara }}</span>
+                        <span class="text-lg font-bold text-slate-400">°C</span>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
+                        <span>DHT11/DHT22</span>
+                        <span class="text-amber-700 font-semibold bg-amber-50 px-2 py-0.5 rounded border border-amber-200">Udara</span>
+                    </div>
+                </div>
+
+                <!-- 3. Kelembapan Tanah -->
                 <div class="white-card rounded-2xl p-5 hover:border-emerald-400 transition duration-200">
                     <div class="flex justify-between items-start mb-3">
                         <span class="text-xs font-bold text-slate-400 tracking-wider">KELEMBAPAN TANAH</span>
@@ -183,7 +201,7 @@
                         </div>
                     </div>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ $data->kelembapan_tanah == 0 ? '--' : $data->kelembapan_tanah }}</span>
+                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ empty($data->kelembapan_tanah) || $data->kelembapan_tanah == 0 ? '--' : $data->kelembapan_tanah }}</span>
                         <span class="text-lg font-bold text-slate-400">%</span>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
@@ -194,7 +212,7 @@
                     </div>
                 </div>
 
-                <!-- 3. Kelembapan Udara -->
+                <!-- 4. Kelembapan Udara -->
                 <div class="white-card rounded-2xl p-5 hover:border-blue-400 transition duration-200">
                     <div class="flex justify-between items-start mb-3">
                         <span class="text-xs font-bold text-slate-400 tracking-wider">KELEMBAPAN UDARA</span>
@@ -203,11 +221,11 @@
                         </div>
                     </div>
                     <div class="flex items-baseline gap-2">
-                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ $data->kelembapan_udara == 0 ? '--' : $data->kelembapan_udara }}</span>
+                        <span class="text-4xl font-black text-slate-900 tracking-tight">{{ empty($data->kelembapan_udara) || $data->kelembapan_udara == 0 ? '--' : $data->kelembapan_udara }}</span>
                         <span class="text-lg font-bold text-slate-400">%</span>
                     </div>
                     <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-500">
-                        <span>Sensor DHT11/DHT22</span>
+                        <span>DHT11/DHT22</span>
                         <span class="text-blue-700 font-semibold bg-blue-50 px-2 py-0.5 rounded border border-blue-200">Udara</span>
                     </div>
                 </div>
